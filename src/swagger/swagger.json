@@ -1,0 +1,116 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Cursos",
+    "version": "1.0.0",
+    "description": "API para login, registro de usuários, consulta de usuários e inscrição em cursos."
+  },
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login de usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login realizado" },
+          "400": { "description": "Erro de login" }
+        }
+      }
+    },
+    "/api/users/register": {
+      "post": {
+        "summary": "Registrar usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Usuário criado" },
+          "400": { "description": "Usuário já existe" }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "Listar usuários",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de usuários" },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    },
+    "/api/courses": {
+      "get": {
+        "summary": "Listar cursos",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de cursos" },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    },
+    "/api/courses/enroll": {
+      "post": {
+        "summary": "Inscrever usuário em curso",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "courseId": { "type": "integer" }
+                },
+                "required": ["username", "courseId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Usuário inscrito" },
+          "400": { "description": "Erro na inscrição" },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
