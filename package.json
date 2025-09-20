@@ -1,6 +1,27 @@
 {
+  "name": "pgats-api-tests-trabalho-final",
+  "version": "1.0.0",
+  "description": "Esta API permite o registro, login e inscrição de usuários em três cursos",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha 'test/*/*/*.test.js' --timeout 10000 --reporter mochawesome",
+    "test-rest-external": "mocha 'test/rest/external/*.test.js' --timeout 10000 --reporter mochawesome",
+    "test-rest-controller": "mocha 'test/rest/controller/*.test.js' --timeout 10000 --reporter mochawesome",
+    "test-graphql-external": "mocha 'test/graphql/external/*.test.js' --timeout 10000 --reporter mochawesome",
+    "test-graphql-controller": "mocha 'test/graphql/controller/*.test.js' --timeout 10000 --reporter mochawesome",
+    "start": "node src/server.js",
+    "start-graphql": "node src/graphql/server.js"
+  },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "chai": "^6.0.1",
+    "mocha": "^11.7.2",
+    "mochawesome": "^7.1.4",
+    "supertest": "^7.1.4"
   }
 }
