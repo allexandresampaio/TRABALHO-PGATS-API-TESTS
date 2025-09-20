@@ -1,15 +1,15 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const app = require('../../../src/app');
+require('dotenv').config();
 
-describe('Course Controller', () => {
+describe('Course External', () => {
     describe('GET, /api/courses/enroll', () => {
 
         tokenCapturado = null;
         credenciaisLogin = require('../fixtures/credenciaisLoginUser.json');
 
         before(async () => {
-            const respostaLogin = await request(app)
+            const respostaLogin = await request(process.env.BASE_URL_REST)
                 .post('/api/auth/login')
                 .send(credenciaisLogin);
             tokenCapturado = respostaLogin.body.token;
@@ -18,7 +18,7 @@ describe('Course Controller', () => {
 
         it('Um usuário pode ser matriculado corretamente em um curso e retorno será 200', async () => {
             credenciaisInscricao = require('../fixtures/credenciaisInscricaoOK.json');
-            const resposta = await request(app)
+            const resposta = await request(process.env.BASE_URL_REST)
                 .post('/api/courses/enroll')
                 .set('Authorization', `Bearer ${tokenCapturado}`)
                 .send(credenciaisInscricao);
@@ -29,13 +29,13 @@ describe('Course Controller', () => {
         it('Um usuário não pode ser matriculado em mais de um curso e retorno será 400', async () => {
             credenciaisInscricaoFalha = require('../fixtures/credenciaisInscricaoFalha.json');
 
-            await request(app)
+            await request(process.env.BASE_URL_REST)
                 .post('/api/courses/enroll')
                 .set('Authorization', `Bearer ${tokenCapturado}`)
                 .send(credenciaisInscricaoFalha);
 
             credenciaisInscricaoFalha.courseId = 2;
-            const resposta = await request(app)
+            const resposta = await request(process.env.BASE_URL_REST)
                 .post('/api/courses/enroll')
                 .set('Authorization', `Bearer ${tokenCapturado}`)
                 .send(credenciaisInscricaoFalha);
