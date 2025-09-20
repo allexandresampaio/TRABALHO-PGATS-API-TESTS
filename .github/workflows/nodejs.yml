@@ -22,9 +22,9 @@ jobs:
     - name: Install dependencies
       run: npm install
     
-    #- name: criando .env file
-    #  run: |
-    #    echo "BASE_URL_REST=${{ secrets.BASE_URL_REST }}" >> .env
+    - name: criando .env file
+      run: |
+        echo "BASE_URL_REST=${{ secrets.BASE_URL_REST }}" >> .env
     #    echo "BASE_URL_GRAPHQL=${{ secrets.BASE_URL_GRAPHQL }}" >> .env
     
     - name: Run controller tests - REST
@@ -33,14 +33,14 @@ jobs:
     #- name: Run controller tests - GRAPHQL
     #  run: npm run test-graphql-controller
       
-    #- name: Put the REST API on
-    #  run: npm start &
+    - name: Put the REST API on
+      run: npm start &
     
-    #- name: Wait until the API is on
-    #  run: sleep 5
+    - name: Wait until the API is on
+      run: sleep 5
     
-    #- name: Run External tests - REST
-    #  run: npm run test-rest-external
+    - name: Run External tests - REST
+      run: npm run test-rest-external
 
     #- name: Put the Graphql API on
     #  run: npm run start-graphql &
