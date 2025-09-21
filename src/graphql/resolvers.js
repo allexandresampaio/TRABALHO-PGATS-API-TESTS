@@ -2,6 +2,7 @@ const userService = require('../../src/services/userService');
 const courseService = require('../../src/services/courseService');
 const authService = require('../../src/services/authService');
 const jwt = require('jsonwebtoken');
+const SECRET = process.env.JWT_SECRET || 'segredo';
 
 module.exports = {
   Query: {
@@ -10,16 +11,22 @@ module.exports = {
   },
   Mutation: {
     login: async (_, { username, password }) => {
-      const { token, user } = await authService.login(username, password);
+      const user = await authService.login({ username, password });
+      const jwt = require('jsonwebtoken');
+      const token = jwt.sign(
+        { username: user.username },
+        SECRET,
+        { expiresIn: '1h' }
+      );
       return { token, user };
     },
     register: async (_, { username, password }) => {
-      return await userService.register(username, password);
+      return await userService.registerUser({ username, password });
     },
-    enroll: async (_, { username, curso }, context) => {
+    enroll: async (_, { username, courseId }, context) => {
       if (!context.token) throw new Error('Authentication required');
-      jwt.verify(context.token, process.env.JWT_SECRET);
-      return await courseService.enroll(username, curso);
+      jwt.verify(context.token, SECRET);
+      return await courseService.enroll({ username, courseId });
     }
   }
 };

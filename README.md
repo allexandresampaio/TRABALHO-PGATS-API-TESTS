@@ -10,6 +10,11 @@ Esta API permite login, registro de usuários, consulta de usuários e inscriç�
    ```bash
    npm install express swagger-ui-express
    ```
+2. Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+   ```
+    BASE_URL_REST="http://localhost:PORTA"
+    BASE_URL_GRAPHQL="http://localhost:PORTA"
+   ```
    # Para GraphQL:
    npm install apollo-server-express graphql jsonwebtoken dotenv
 

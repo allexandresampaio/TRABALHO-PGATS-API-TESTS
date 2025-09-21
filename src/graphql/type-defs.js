@@ -4,10 +4,7 @@ const typeDefs = gql`
   type User {
     username: String!
     curso: String
-    favorecidos: [String]
-    saldo: Float
   }
-
 
   type AuthPayload {
     token: String!
@@ -22,7 +19,7 @@ const typeDefs = gql`
   type Mutation {
     login(username: String!, password: String!): AuthPayload
     register(username: String!, password: String!): User
-    enroll(username: String!, curso: String!): User
+    enroll(username: String!, courseId: Int!): User
   }
 `;
 
