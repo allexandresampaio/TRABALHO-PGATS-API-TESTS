@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const app = require('../../../src/app');
 const courseService = require('../../../src/services/courseService');
-describe('Course Controller', () => {
+describe('Course Controller - REST API', () => {
     describe('GET, /api/courses/enroll', () => {
 
         tokenCapturado = null;

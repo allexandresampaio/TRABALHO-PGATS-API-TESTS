@@ -2,7 +2,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 const app = require('../../../src/app');
 
-describe('User Controller', () => {
+describe('User Controller - REST API', () => {
     describe('GET, /api/users', () => {
 
         tokenCapturado = null;

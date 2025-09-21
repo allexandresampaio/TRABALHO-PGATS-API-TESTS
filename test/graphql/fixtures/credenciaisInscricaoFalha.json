@@ -1,0 +1,7 @@
+{
+    "query": "mutation Enroll($username: String!, $courseId: Int!) { enroll(username: $username, courseId: $courseId) { username curso }}",
+    "variables": {
+        "username": "desa",
+        "courseId": 1
+    }
+}

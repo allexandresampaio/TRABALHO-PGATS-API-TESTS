@@ -7,7 +7,8 @@ const SECRET = process.env.JWT_SECRET || 'segredo';
 module.exports = {
   Query: {
     users: () => userService.getAllUsers(),
-    user: (_, { username }) => userService.getUserByUsername(username)
+    user: (_, { username }) => userService.getUserByUsername(username),
+    courses: () => courseService.getAllCourses(),
   },
   Mutation: {
     login: async (_, { username, password }) => {

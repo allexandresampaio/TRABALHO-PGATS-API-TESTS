@@ -1,0 +1,6 @@
+{
+    "query": "query Users { courses { id name }}",
+    "variables": {
+        
+    }
+}
